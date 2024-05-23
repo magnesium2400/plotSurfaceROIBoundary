@@ -46,8 +46,8 @@ ip = inputParser;
 validationFcn = @(x) (isnumeric(x) && ismatrix(x));
 addOptional(ip, 'verts', [], @(x) validationFcn(x));
 addOptional(ip, 'faces', [], @(x) validationFcn(x));
-addOptional(ip, 'rois',  [], @(x) validationFcn(x));
-addOptional(ip, 'data',  [], @(x) validationFcn(x));
+addOptional(ip, 'rois',  [], @(x) validationFcn(x) || islogical(x));
+addOptional(ip, 'data',  [], @(x) validationFcn(x) || islogical(x));
 
 addParameter(ip, 'checkContents', true, @islogical);
 addParameter(ip, 'fillEmpty', false, @islogical);
@@ -55,8 +55,8 @@ addParameter(ip, 'fillEmpty', false, @islogical);
 parse(ip, varargin{:});
 verts = ip.Results.verts;
 faces = ip.Results.faces;
-rois  = ip.Results.rois;
-data  = ip.Results.data;
+rois  = +ip.Results.rois;
+data  = +ip.Results.data;
 
 
 %% Check shape
