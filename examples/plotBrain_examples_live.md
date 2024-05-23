@@ -41,7 +41,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).');
 
 
 ![./examples/plotBrain_examples_live_media/figure_0.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_0.png
+](./examples/plotBrain_examples_live_media/figure_0.png
 )
 
 
@@ -53,7 +53,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, lh_verts(:,2));
 
 
 ![./examples/plotBrain_examples_live_media/figure_1.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_1.png
+](./examples/plotBrain_examples_live_media/figure_1.png
 )
 
 
@@ -65,7 +65,7 @@ figure; plotBrain(lh_verts, lh_faces, logical(Scha17_parcs.lh_scha100), lh_verts
 
 
 ![./examples/plotBrain_examples_live_media/figure_2.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_2.png
+](./examples/plotBrain_examples_live_media/figure_2.png
 )
 
 
@@ -77,7 +77,7 @@ figure; plotBrain(lh_verts, lh_faces, ones(size(lh_verts, 1), 1), lh_verts(:,2))
 
 
 ![./examples/plotBrain_examples_live_media/figure_3.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_3.png
+](./examples/plotBrain_examples_live_media/figure_3.png
 )
 
 
@@ -90,7 +90,7 @@ figure; plotBrain(brainSurface, ones(size(lh_verts, 1), 1), lh_verts(:,2));
 
 
 ![./examples/plotBrain_examples_live_media/figure_4.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_4.png
+](./examples/plotBrain_examples_live_media/figure_4.png
 )
 
 
@@ -112,7 +112,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, 'v
 
 
 ![./examples/plotBrain_examples_live_media/figure_5.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_5.png
+](./examples/plotBrain_examples_live_media/figure_5.png
 )
 
 
@@ -125,7 +125,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, 'c
 
 
 ![./examples/plotBrain_examples_live_media/figure_6.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_6.png
+](./examples/plotBrain_examples_live_media/figure_6.png
 )
 
 
@@ -135,7 +135,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, 'c
 
 
 ![./examples/plotBrain_examples_live_media/figure_7.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_7.png
+](./examples/plotBrain_examples_live_media/figure_7.png
 )
 
 
@@ -145,7 +145,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, 'c
 
 
 ![./examples/plotBrain_examples_live_media/figure_8.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_8.png
+](./examples/plotBrain_examples_live_media/figure_8.png
 )
 
 
@@ -158,7 +158,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, ..
 
 
 ![./examples/plotBrain_examples_live_media/figure_9.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_9.png
+](./examples/plotBrain_examples_live_media/figure_9.png
 )
 
 
@@ -171,7 +171,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).' - 25, ..
 
 
 ![./examples/plotBrain_examples_live_media/figure_10.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_10.png
+](./examples/plotBrain_examples_live_media/figure_10.png
 )
 
 # Plotting Multiple Brain Maps
@@ -193,7 +193,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, rand(50, 4));
 
 
 ![./examples/plotBrain_examples_live_media/figure_11.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_11.png
+](./examples/plotBrain_examples_live_media/figure_11.png
 )
 
 ## Changing only the parcellation
@@ -211,7 +211,7 @@ figure; plotBrain(lh_verts, lh_faces, ...
 
 
 ![./examples/plotBrain_examples_live_media/figure_12.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_12.png
+](./examples/plotBrain_examples_live_media/figure_12.png
 )
 
 ## Changing only the view
@@ -228,7 +228,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, rand(50, 1), ...
 
 
 ![./examples/plotBrain_examples_live_media/figure_13.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_13.png
+](./examples/plotBrain_examples_live_media/figure_13.png
 )
 
 ## Changing the data map and the parcellation
@@ -246,7 +246,7 @@ figure; plotBrain(lh_verts, lh_faces, ...
 
 
 ![./examples/plotBrain_examples_live_media/figure_14.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_14.png
+](./examples/plotBrain_examples_live_media/figure_14.png
 )
 
 ## Changing the shape of the grid
@@ -263,7 +263,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, rand(50, 4));
 
 
 ![./examples/plotBrain_examples_live_media/figure_15.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_15.png
+](./examples/plotBrain_examples_live_media/figure_15.png
 )
 
 
@@ -273,7 +273,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, rand(50, 4), 'til
 
 
 ![./examples/plotBrain_examples_live_media/figure_16.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_16.png
+](./examples/plotBrain_examples_live_media/figure_16.png
 )
 
   
@@ -293,7 +293,7 @@ end
 
 
 ![./examples/plotBrain_examples_live_media/figure_17.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_17.png
+](./examples/plotBrain_examples_live_media/figure_17.png
 )
 
 # Plotting Two Hemispheres
@@ -311,7 +311,7 @@ plotBrain('lh', {lh_verts, lh_faces, Scha7_parcs.lh_scha100, rand(50,1)}, ...
 
 
 ![./examples/plotBrain_examples_live_media/figure_18.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_18.png
+](./examples/plotBrain_examples_live_media/figure_18.png
 )
 
 
@@ -334,7 +334,7 @@ plotBrain('lh', {lh_verts, lh_faces, Scha7_parcs.lh_scha100, rand(50,1)}, ...
 
 
 ![./examples/plotBrain_examples_live_media/figure_19.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_19.png
+](./examples/plotBrain_examples_live_media/figure_19.png
 )
 
 
@@ -366,7 +366,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-37.5:1
 
 
 ![./examples/plotBrain_examples_live_media/figure_20.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_20.png
+](./examples/plotBrain_examples_live_media/figure_20.png
 )
 
 
@@ -376,7 +376,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-37.5:1
 
 
 ![./examples/plotBrain_examples_live_media/figure_21.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_21.png
+](./examples/plotBrain_examples_live_media/figure_21.png
 )
 
 
@@ -388,7 +388,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-25:25:
 
 
 ![./examples/plotBrain_examples_live_media/figure_22.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_22.png
+](./examples/plotBrain_examples_live_media/figure_22.png
 )
 
 
@@ -398,7 +398,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-25:25:
 
 
 ![./examples/plotBrain_examples_live_media/figure_23.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_23.png
+](./examples/plotBrain_examples_live_media/figure_23.png
 )
 
 
@@ -410,7 +410,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-37.5:1
 
 
 ![./examples/plotBrain_examples_live_media/figure_24.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_24.png
+](./examples/plotBrain_examples_live_media/figure_24.png
 )
 
 
@@ -431,7 +431,7 @@ ylabel(tl, 'Map changes');
 
 
 ![./examples/plotBrain_examples_live_media/figure_25.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_25.png
+](./examples/plotBrain_examples_live_media/figure_25.png
 )
 
 
@@ -446,7 +446,7 @@ ylabel(tl, 'View changes');
 
 
 ![./examples/plotBrain_examples_live_media/figure_26.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_26.png
+](./examples/plotBrain_examples_live_media/figure_26.png
 )
 
 ## Groupings
@@ -481,7 +481,7 @@ for ii = 1:8; title(nexttile(tl, ii), sprintf("Map %d", ii)); end
 
 
 ![./examples/plotBrain_examples_live_media/figure_27.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_27.png
+](./examples/plotBrain_examples_live_media/figure_27.png
 )
 
 
@@ -495,7 +495,7 @@ title(tl, 'groupBy data');
 
 
 ![./examples/plotBrain_examples_live_media/figure_28.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_28.png
+](./examples/plotBrain_examples_live_media/figure_28.png
 )
 
 
@@ -528,7 +528,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, 50*rand(50, 9)+(-
 
 
 ![./examples/plotBrain_examples_live_media/figure_29.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_29.png
+](./examples/plotBrain_examples_live_media/figure_29.png
 )
 
 
@@ -539,7 +539,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, 50*rand(50, 9)+(-
 
 
 ![./examples/plotBrain_examples_live_media/figure_30.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_30.png
+](./examples/plotBrain_examples_live_media/figure_30.png
 )
 
 
@@ -551,7 +551,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-75:12.
 
 
 ![./examples/plotBrain_examples_live_media/figure_31.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_31.png
+](./examples/plotBrain_examples_live_media/figure_31.png
 )
 
 
@@ -561,7 +561,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-75:12.
 
 
 ![./examples/plotBrain_examples_live_media/figure_32.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_32.png
+](./examples/plotBrain_examples_live_media/figure_32.png
 )
 
 
@@ -582,7 +582,7 @@ figure; [~,~,tl,tl2] = plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1
 
 
 ![./examples/plotBrain_examples_live_media/figure_33.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_33.png
+](./examples/plotBrain_examples_live_media/figure_33.png
 )
 
 
@@ -606,7 +606,7 @@ figure; plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1:50).'+(-75:12.
 
 
 ![./examples/plotBrain_examples_live_media/figure_34.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_34.png
+](./examples/plotBrain_examples_live_media/figure_34.png
 )
 
 
@@ -619,7 +619,7 @@ figure; [~,~,tl,tl2] = plotBrain(lh_verts, lh_faces, Scha17_parcs.lh_scha100, (1
 
 
 ![./examples/plotBrain_examples_live_media/figure_35.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_35.png
+](./examples/plotBrain_examples_live_media/figure_35.png
 )
 
 # Combining into Larger Figures
@@ -644,6 +644,6 @@ title(temp, {'2 datasets', '4 views'});
 
 
 ![./examples/plotBrain_examples_live_media/figure_36.png
-](plotBrain_examples_live_media/./examples/plotBrain_examples_live_media/figure_36.png
+](./examples/plotBrain_examples_live_media/figure_36.png
 )
 
