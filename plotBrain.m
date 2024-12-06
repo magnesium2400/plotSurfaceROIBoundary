@@ -13,8 +13,8 @@ function [patches, boundary_plots, outerTiledlayout, innerTiledlayouts] = plotBr
 %  plotSurfaceROIBoundary (Stuart Oldham):
 %  https://github.com/StuartJO/plotSurfaceROIBoundary or
 %  https://github.com/StuartJO/BrainSurfaceAnimation
-% 
-% 
+%
+%
 %% Syntax
 %   plotBrain(verts, faces, rois, data)
 %   plotBrain(surface, rois, data)
@@ -35,10 +35,10 @@ function [patches, boundary_plots, outerTiledlayout, innerTiledlayouts] = plotBr
 % `plotBrain(verts, faces, rois, data)` plots the patch object with coordinates
 % given by `verts` and `faces`, and coloured according to `rois` and `data`.
 % Left/right hemisphere will be deduced based on the×coordinates of `verts`.
-% 
+%
 % `plotBrain(surface, rois, data)` plots the patch object given by the struct
 % `surface`, and coloured according to `rois` and `data`.
-% 
+%
 % `plotBrain('lh', {verts, faces, rois, data})` plots the surface
 % of the left hemisphere, based on the data presented in the cell array that
 % follows. This cell array should contain the data used to generate indivual
@@ -82,125 +82,125 @@ function [patches, boundary_plots, outerTiledlayout, innerTiledlayouts] = plotBr
 %
 %% Input Arguments
 %  verts - xyz coordinates of surface (V×3 matrix)
-%  
+%
 %  faces - triangulation of surface (F×3 matrix)
-%  
-%  rois - parcellation of surface (V×1 vector | V×? matrix) 
+%
+%  rois - parcellation of surface (V×1 vector | V×? matrix)
 %  Vector or matrix indicating the ROI ID of each vertex. Use 0 to index
 %  unallocated vertices (e.g. the medial wall). If `rois` is a vector, the same
 %  parcellation will be applied to each column in `data`. Otherwise, the number
 %  of columns in `rois` should match the number of columns in `data` (and one
 %  parcellation will be used for each map).
-%  
+%
 %  data - brain maps to be plotted (R×1 vector | R×? matrix | V×1 vector | V×? matrix | 1×? cell array )
-%  Data can be specified at either the ROI level (where `size(data, 1) == max(rois)`) 
+%  Data can be specified at either the ROI level (where `size(data, 1) == max(rois)`)
 %  or the vertex level (where `size(data, 1) == size(verts,1)`). If multiple
 %  columns are specified or a cell array is used, each column/cell is treated as
-%  a map, and several brains will be plotted. 
-%  
+%  a map, and several brains will be plotted.
+%
 %  surface - structure to be plotted with fields 'vertices' and 'faces'
-%  
+%
 %  lh - data to be passed to plotBrain for left hemisphere (cell array)
 %  This should be a cell array containing the data that would be used to plot a
-%  single view using plotBrain i.e. {verts, faces, rois, data}. 
+%  single view using plotBrain i.e. {verts, faces, rois, data}.
 %
 %  rh - data to be passed to plotBrain for right hemisphere (cell array)
 %  This should be a cell array containing the data that would be used to plot a
-%  single view using plotBrain i.e. {verts, faces, rois, data}.  
-%  
-%  
+%  single view using plotBrain i.e. {verts, faces, rois, data}.
+%
+%
 %% Name-Value Arguments
 %  viewOrder - Views to use for each of the inputs (cell array)
 %  The views to use to plot each view of the left and right hemispheres. These
 %  can be in the form of vectors of camera positions, or as the shorthand
 %  'll'/'lm'/'rl'/'rm' (left/right lateral/medial).
-% 
+%
 %  hemiOrder - Which hemisphere to plot for each view (cell array)
 %  If `viewOrder` is specified using camera angles and both left and right
 %  hemisphere are specified, specify `hemiOrder` as a cell array of `'l'` and
 %  `'r'` to indicate which camera angle applies to which hemiphere.
-%  
+%
 %  parent - Handle to parent axes (axes handle | tiledlayout handle)
-%  If specified as a tiledlayout handle, use in conjunction with `PARENTHANDLE.Layout.Tile` 
+%  If specified as a tiledlayout handle, use in conjunction with `PARENTHANDLE.Layout.Tile`
 %  to position the current plot within the parent tiledlayout. See also the
-%  examples in the live script. Also consider utilising with `PARENTHANDLE.Layout.TileSpan`. 
-%  
-%  forceTiledlayout - Flag to force 1 map to be generated onto a tiledlayout (false (default) | true) 
+%  examples in the live script. Also consider utilising with `PARENTHANDLE.Layout.TileSpan`.
+%
+%  forceTiledlayout - Flag to force 1 map to be generated onto a tiledlayout (false (default) | true)
 %  For simplicity, if generating only 1 map, this will NOT use tiledlayout.
 %  However, if a tiledlayout output is desired (e.g. if parent is a
-%  tiledlayout), this should be set to `true`. 
-%  
+%  tiledlayout), this should be set to `true`.
+%
 %  tiledlayoutOptions - Options to be passed through when generating outerTiledlayout (cell array)
 %  NOTE that this is unravelled and passed directly through to tiledlayout. By
 %  default, the 'flow' layout is used. See the examples for how this can be
 %  changed.
-%  
-%  groupBy - Flag to group together brain maps onto sub-tiledlayouts ('none' (default) | 'data' | 'view' ) 
+%
+%  groupBy - Flag to group together brain maps onto sub-tiledlayouts ('none' (default) | 'data' | 'view' )
 %  If set to 'none', each dataset and brainmap will be plotted on its own tile
 %  in outerTiledlayout. Note that innerTiledlayout will not be generated in this
 %  case. If set to 'data', the multiple views of each dataset will be generated
 %  on their own individual tiledlayout (i.e. innerTiledlayout); these will then
 %  be embedded into the outerTiledlayout. A similar process occurs for 'view'.
 %  See also the examples in the live script.
-%  
+%
 %  tiledlayout2Options - Options to be passed through when generating each innerTiledlayout (cell array)
 %  NOTE that this is unravelled and passed directly through to tiledlayout. By
 %  default, the 'flow' layout is used. See the examples for how this can be
 %  changed.
-%  
+%
 %  titles - Titles for each group/map (cell array)
 %  There must be one element for each group (if '`groupBy`' is specified)/map.
-%  
-%  clim - New color limits to apply to all the maps (vector of the form |[cmin max]|) 
+%
+%  clim - New color limits to apply to all the maps (vector of the form |[cmin max]|)
 %  Specification of `clim` will set `colorscheme` to global.
-%  
+%
 %  colormap - Colormap for plotting (colormap name | three-column matrix of RGB triples | function handle)
 %  Colormap for the new color scheme, specified as a colormap name, a
 %  three-column matrix of RGB triplets, or a function handle (which may be
 %  useful for diverging/dynamic colormaps). Note that it is difficult to change
 %  the colors of the patch object after generation (due to the functionality of
 %  plotSurfaceROIBoundary): setting the correct colormap when plotBrain is
-%  called is recommended. 
+%  called is recommended.
 %
-%  colorscheme - Flag to use same clims for all brainmaps ('indiv' (default) | 'global') 
+%  colorscheme - Flag to use same clims for all brainmaps ('indiv' (default) | 'global')
 %  If set to 'global', the maximum and minimum values from both the left and
 %  right hemispheres will be used to set the color limits for each plot. If
 %  'clim' is specified, those limits will instead be applied to each plot.
-%  
-%  colorbarOn - Flag to plot colorbar for each map/group (false (default) | true) 
+%
+%  colorbarOn - Flag to plot colorbar for each map/group (false (default) | true)
 %  If set to true, a colorbar will be plotted for each indidivual map or each
 %  group (if 'groupBy' is specified). This is recommended, as accessing axis
 %  color properties after plotBrain is called can be difficult (due to the
 %  functionality of plotSurfaceROIBoundary).
-%  
+%
 %  colorbarOptions - Options to use when generating colorbars (cell array)
 %  This is unravelled and passed through directly to COLORBAR. This should
-%  contain optional arguments for modifying the generation of the colorbar. 
-%  
+%  contain optional arguments for modifying the generation of the colorbar.
+%
 %  colorbarLocation - Location of colorbar ('east' (default) | string)
-%  
-%  plotSurfaceROIBoundaryOptions - options to be passed through to plotSurfaceROIBoundary (cell array) 
+%
+%  plotSurfaceROIBoundaryOptions - options to be passed through to plotSurfaceROIBoundary (cell array)
 %  NOTE that this is unravelled and passed through directly to
 %  plotSurfaceROIBoundary. This should contain supplementary arguments to be
 %  passed to plotSurfaceROIBoundary for modifying the generation of the plots,
 %  including the method for separating ROIs. See plotSurfaceROIBoundary for more
-%  information regarding its optional inputs. 
+%  information regarding its optional inputs.
 %
 %
 %% Output Arguments
 %  p - output from plotSurfaceROIBoundary (cell array)
 %  Cell array containing all the outputs from plotBrain, in order of tile.
-%  
+%
 %  boundary_plots - output from plotSurfaceROIBoundary (cell array)
 %  Cell array containing all the outputs from plotBrain, in order of tile.
-%  
+%
 %  outerTiledLayout - tiledlayout of all brain maps (tiledlayout)
-%  This is the tiledlayout in which all the brain maps are embedded. 
-%  
-%  innerTiledLayouts - tiledlayouts of each view/dataset of brain maps (cell array) 
+%  This is the tiledlayout in which all the brain maps are embedded.
+%
+%  innerTiledLayouts - tiledlayouts of each view/dataset of brain maps (cell array)
 %  If `'groupBy'` is specified, each group is plotted on its own tiledlayout,
 %  within outerTiledlayout. This is the cell array of all of those.
-%  
+%
 %
 %% See also
 %  plotSurfaceROIBoundary, VIEW, PATCH, TILEDLAYOUT
@@ -211,17 +211,15 @@ function [patches, boundary_plots, outerTiledlayout, innerTiledlayouts] = plotBr
 %
 %
 %% TODO
-% * consider reviewing color scale for each axis
 % * consider adding mechanism to change only the tiledlayout size
 % * consider allowing different options to be passed throught for each plot
 %
 %
-%% ENDPUBLISH
 
 
 %% Experimental/undocumented features
-% * setting `rois` and/or `data` to empty vectors may also work, but is not recommmended 
-% * using cell arrays to specigy `verts` and `faces` is permissible (to plot different surfaces), but has not been completely tested
+% * setting `rois` and/or `data` to empty vectors may also work, but is not recommmended
+% * using cell arrays to specify `verts` and `faces` is permissible (to plot different surfaces), but has not been completely tested
 
 
 %% Input Options
@@ -250,15 +248,27 @@ addParameter(ip, 'titles', {});
 
 % color
 addParameter(ip, 'clim', []);
-addParameter(ip, 'colormap', []);
+addParameter(ip, 'colormap', @parula);
 addParameter(ip, 'colorscheme', 'indiv'); % other option is 'global'
 addParameter(ip, 'colorbarOn', false);
 addParameter(ip, 'colorbarOptions', {});
 addParameter(ip, 'colorbarLocation', 'east');
 
+% patchp options
+addParameter(ip, 'PatchOptions',    {},             @iscell);
+addParameter(ip, 'FaceColor',       'interp',       @(x) isnumeric(x) || isStringScalar(x) || ischar(x));
+addParameter(ip, 'FaceAlpha',       1,              @(x) isnumeric(x) || isStringScalar(x) || ischar(x));
+addParameter(ip, 'EdgeColor',       'none',         @(x) isnumeric(x) || isStringScalar(x) || ischar(x));
+addParameter(ip, 'LineStyle',       "-",            @(x) isStringScalar(x) || ischar(x));
+addParameter(ip, 'BoundaryMethod',  'faces',        @(x) any(strcmpi(x,{'faces','midpoint','centroid','edge_faces','edge_vertices','none'})));
+addParameter(ip, 'BoundaryColor',   [0 0 0],        @(x) isnumeric(x) || isStringScalar(x) || ischar(x));
+addParameter(ip, 'BoundaryOptions', {},             @iscell);
+addParameter(ip, 'UnknownColor',    [0.5 0.5 0.5],  @(x) isnumeric(x) || isStringScalar(x) || ischar(x));
+
 % other
-addParameter(ip, 'plotSurfaceROIBoundaryOptions', {'faces', parula(100), 1});
-addParameter(ip, 'camlights', [[80, -10]; [-80, -10]]);
+addParameter(ip, 'camlight', [[80, -10]; [-80, -10]]); % n*2 matrix of camlight locations
+addParameter(ip, 'material', 'dull', @(x) isStringScalar(x) || ischar(x));
+addParameter(ip, 'axis',     {'equal','tight','off'}, @iscell);
 
 parse(ip, varargin{:});
 iud = @(fieldname) any(contains(ip.UsingDefaults, fieldname)); % is using defaults
@@ -266,7 +276,7 @@ iud = @(fieldname) any(contains(ip.UsingDefaults, fieldname)); % is using defaul
 
 %% If simple syntax is used
 % convert to 'lh'/'rh' syntax, and call again
-% i.e. verts, faces, rois, data are specified individually, not using 'lh'/'rh' cell formatting 
+% i.e. verts, faces, rois, data are specified individually, not using 'lh'/'rh' cell formatting
 vertices = ip.Results.vertices;
 if ~isempty(vertices) % if using simple syntax
     if isa(vertices, 'struct')
@@ -296,7 +306,7 @@ end
 %% Parse Inputs
 lh = ip.Results.lh;
 rh = ip.Results.rh;
-viewOrder = ip.Results.viewOrder; 
+viewOrder = ip.Results.viewOrder;
 
 if isstring(viewOrder) || ischar(viewOrder); viewOrder = cellstr(viewOrder); end
 hemiOrder = cellstr(ip.Results.hemiOrder);
@@ -318,7 +328,7 @@ if iud('hemiOrder')
     else % if both lh and rh are specified, and viewOrder specifies camera angles, user needs to specify which hemisphere to plot
         for ii = 1:length(viewOrder)
             temp = getEntry(viewOrder, ii);
-            assert(isstring(temp) || ischar(temp), 'please ensure viewOrder and hemiOrder are correctly specified');
+            assert(isstring(temp) || ischar(temp), 'Please ensure viewOrder and hemiOrder are correctly specified');
             hemiOrder{ii} = temp(1);
         end
     end
@@ -326,60 +336,49 @@ end
 
 % set up data and rois: get size of lhData and rhData, incl if empty
 if ~isempty(lh)
-    lhRois = lh{end-1}; 
-    lhData = lh{end}; 
+    lhRois = lh{end-1};
+    lhData = lh{end};
     assert(size(lhRois,2) < 2 || size(lhData,2) < 2 || size(lhRois,2) == size(lhData, 2), ...
-        'please ensure lh rois and data are correctly specified');
+        'Please ensure lh rois and data are correctly specified');
     nData = max([1, size(lhData, 2), size(lhRois, 2)]);
 else
     lhData = {};
 end
-if ~isempty( rh)
+if ~isempty(rh)
     rhRois = rh{end-1};
-    rhData = rh{end}; 
+    rhData = rh{end};
     assert(size(rhRois,2) < 2 || size(rhData,2) < 2 || size(rhRois,2) == size(rhData, 2), ...
-        'please ensure rh rois and data are correctly specified');
+        'Please ensure rh rois and data are correctly specified');
     nData =  max([1, size(rhData, 2), size(rhRois, 2)]);
 else
     rhData = {};
 end
 
 assert(isempty(rh) || isempty(lh) || size(lhData, 2) == size(rhData, 2), ...
-        'please ensure lh and rh rois/data are correctly specified');
+    'Please ensure lh and rh rois/data are correctly specified');
 
-% set up colormap
-plotSurfaceOptions = ip.Results.plotSurfaceROIBoundaryOptions;
-cmap = ip.Results.colormap;
-if iud('plotSurfaceROIBoundaryOptions')
-    if ~isempty(cmap)
-        if (isstring(cmap) || ischar(cmap)); cmap = colormap(cmap); end
-        plotSurfaceOptions{2} = cmap;
-    end
-end
-cmap = plotSurfaceOptions{2};
-
-% set up global colorscheme:
-% - if colorscheme, 'global' is specified
-colorscheme = ip.Results.colorscheme; colorMin = +Inf; colorMax = -Inf;
-if strcmp(colorscheme, 'global')
-    for idxData = 1:nData
-        colorMin = min([colorMin, min(getEntry(lhData, idxData)), min(getEntry(rhData, idxData))]);
-        colorMax = max([colorMax, max(getEntry(lhData, idxData)), max(getEntry(rhData, idxData))]);
-    end
-    plotSurfaceOptions{4} = [colorMin, colorMax]; % pass in clims
-end
-
-% - or if clims are specified
-if ~iud('clim') && iud('colorscheme')
+% set up global colorscheme if requested:
+colorscheme = ip.Results.colorscheme;
+if ~iud('clim')                         % - if clims are specified (not using default)
     colorMin = min(ip.Results.clim);
     colorMax = max(ip.Results.clim);
     colorscheme = 'global';
+elseif strcmp(colorscheme, 'global')    % - or if 'colorscheme', 'global' is specified
+    colorMin = +Inf; colorMax = -Inf;
+    for idxData = 1:nData % find clims
+        colorMin = min([colorMin, min(getEntry(lhData, idxData)), min(getEntry(rhData, idxData))]);
+        colorMax = max([colorMax, max(getEntry(lhData, idxData)), max(getEntry(rhData, idxData))]);
+    end
 end
-if colorMin == colorMax; colorMin = colorMin-1; colorMax = colorMax+1; end
 
 % others
+patchpFields = struct();
+for ii = ["FaceColor", "EdgeColor", "FaceAlpha", "LineStyle", ...
+        "BoundaryMethod", "BoundaryColor", "BoundaryOptions", "UnknownColor"]
+    patchpFields.(ii) = ip.Results.(ii);
+end
+
 groupBy = ip.Results.groupBy;
-camlights = ip.Results.camlights;
 tiledlayout2Options = ip.Results.tiledlayout2Options;
 
 
@@ -399,158 +398,103 @@ else
 end
 
 % Set up nested tiledlayouts if groupBy is specified
-nSubtiles = [];
-if strcmp(groupBy, 'data'); nSubtiles = nData;
-elseif strcmp(groupBy, 'view'); nSubtiles = nView;
+tl2 = {};
+switch groupBy
+    case 'data'; nSubtiles = nData;
+    case 'view'; nSubtiles = nView;
+    otherwise;   nSubtiles = 0;
 end
 
-tl2 = {};
-if ~isempty(nSubtiles)
-    for ii = 1:nSubtiles
-        tl2{ii} = tiledlayout(tl, tiledlayout2Options{:}); %#ok<AGROW>
-        tl2{ii}.Layout.Tile = ii; %#ok<AGROW>
-        if ~iud('titles'); title(tl2{ii}, ip.Results.titles{ii}); end
-    end
+for ii = 1:nSubtiles
+    tl2{ii} = tiledlayout(tl, tiledlayout2Options{:}); %#ok<AGROW>
+    tl2{ii}.Layout.Tile = ii; %#ok<AGROW>
+    if ~iud('titles'); title(tl2{ii}, ip.Results.titles{ii}); end % add titles if supplied
 end
 
 patches = {}; boundary_plots = {};
 
-% if strcmp(groupBy, 'data')
-%     if iud('tiledlayout2Options')
-% %         tiledlayout2Options = {1, nView, 'TileSpacing', 'tight'};
-%     end
-%     for idxData = 1:nData
-%         tl2{idxData} = tiledlayout(tl, tiledlayout2Options{:}); %#ok<AGROW>
-%         tl2{idxData}.Layout.Tile = idxData; %#ok<AGROW>
-%         if ~iud('titles'); title(tl2{idxData}, ip.Results.titles{idxData}); end
-%     end
-% elseif strcmp(groupBy, 'view')
-%     if iud('tiledlayout2Options')
-% %         tiledlayout2Options = {1, nData, 'TileSpacing', 'tight'};
-%     end
-%     for idxView = 1:nView
-%         tl2{idxView} = tiledlayout(tl, tiledlayout2Options{:}); %#ok<AGROW>
-%         tl2{idxView}.Layout.Tile = idxView; %#ok<AGROW>
-%         if ~iud('titles'); title(tl2{idxView}, ip.Results.titles{idxView}); end
-%     end
-% end
 
-
-%% Do plotting using plotSurfaceROIBoundary
+%% Do plotting using patchp
 % Plot each brain map/parcellation and view
 for idxData = 1:nData
     for idxView = 1:nView
 
         % get hemisphere data
-        temp = getEntry(hemiOrder, idxView);
-        if strcmp(temp(1), 'l'); currentHemi = lh;
-        else; currentHemi = rh; end
+        if extractBetween(getEntry(hemiOrder, idxView),1,1) == "l"; currentHemi = lh;
+        else;                                                       currentHemi = rh; end
 
         % get verts from struct/cell/matrix
-        if isstruct(currentHemi{1})
-            currentVerts = currentHemi{1}.vertices;
-        elseif iscell(currentHemi{1})
-            currentVerts = getEntry(currentHemi{1}, idxData);
-        else
-            currentVerts = currentHemi{1};
+        if   isstruct(currentHemi{1});  currentVerts = currentHemi{1}.vertices;
+        elseif iscell(currentHemi{1});  currentVerts = getEntry(currentHemi{1}, idxData);
+        else;                           currentVerts = currentHemi{1};
         end
 
         % get faces from struct/cell/matrix
-        if isstruct(currentHemi{1})
-            currentFaces = currentHemi{1}.faces;
-        elseif iscell(currentHemi{2})
-            currentFaces = getEntry(currentHemi{2}, idxData);
-        else
-            currentFaces = currentHemi{2};
+        if   isstruct(currentHemi{1});  currentFaces = currentHemi{1}.faces;
+        elseif iscell(currentHemi{2});  currentFaces = getEntry(currentHemi{2}, idxData);
+        else;                           currentFaces = currentHemi{2};
         end
 
         % get rois and data from cell/matrix: takes column/cell #ii or last one, whichever is lower
-%         currentRois = currentHemi{end-1}; 
-%         currentData = currentHemi{end}; 
-        currentRois = getEntry(currentHemi{end-1}, idxData);if isempty(currentRois); currentRois = ones(size(currentVerts(:,1))); end
-        currentData = getEntry(currentHemi{end}, idxData);if isempty(currentData); currentData = currentVerts(:,2); end
+        currentRois = getEntry(currentHemi{end-1}, idxData); if isempty(currentRois); currentRois = ones(size(currentVerts(:,1))); end
+        currentData = getEntry(currentHemi{end}, idxData);   if isempty(currentData); currentData = currentVerts(:,2); end
         assert(size(currentRois, 2) == 1 || size(currentData, 2) == 1 || size(currentRois, 2) == size(currentData, 2), ...
             'parcellations (rois) and data should have a compatible number of columns');
 
         % set current axis
-        if (nTiles > 1) || ip.Results.forceTiledlayout
-            if strcmp(groupBy, 'data')
-                ax = nexttile(tl2{idxData});
-            elseif strcmp(groupBy, 'view')
-                ax = nexttile(tl2{idxView});
-            else
-                ax = nexttile(tl);
-            end
+        if (nTiles > 1) || ip.Results.forceTiledlayout; switch groupBy %#ok<ALIGN>
+            case 'data'; ax = nexttile(tl2{idxData});
+            case 'view'; ax = nexttile(tl2{idxView});
+            otherwise;   ax = nexttile(tl);
+        end; end
+
+    % plot using patchp
+    [patches{end+1},boundary_plots{end+1}] = ...
+        patchp('Vertices', currentVerts, 'Faces', currentFaces, ...
+        'FaceVertexCData', currentData,  'Parcellation', currentRois, ...
+        patchpFields, ip.Results.PatchOptions{:}); %#ok<AGROW>
+
+    % set other properties
+    for ii = ip.Results.camlight'; camlight(ax, ii(1), ii(2)); end
+    material(ax, ip.Results.material );
+    axis(    ax, ip.Results.axis{:}  );
+
+    % set clims/cmap
+    if strcmp(colorscheme, 'indiv')
+        colorMin = min(currentData(:));
+        colorMax = max(currentData(:));
+    end
+    if colorMin == colorMax; colorMin = colorMin-1; colorMax = colorMax+1; end
+    clim(ax, [colorMin, colorMax]);
+    colormap(ax, ip.Results.colormap());
+
+    % set colorbar if requested
+    if ip.Results.colorbarOn
+        if (strcmp(groupBy, 'data') && idxView == nView) || (strcmp(groupBy, 'view') && idxData == nData) % so that only 1 colorbar is plotted
+            c = colorbar(ax, ip.Results.colorbarOptions{:});
+            c.Layout.Tile = ip.Results.colorbarLocation;
+        elseif strcmp(groupBy, 'none')
+            colorbar(ax, ip.Results.colorbarOptions{:});
         end
+    end
 
-        % set clims and truncate data if needed
-        if strcmp(colorscheme, 'global') || ~iud('clim')
-            caxis(ax, [colorMin, colorMax]);
-        else
-            colorMin = min(currentData(:));
-            colorMax = max(currentData(:));
-            if colorMin == colorMax; colorMin = colorMin-1; colorMax = colorMax+1; end
-            caxis(ax, [colorMin, colorMax]); 
-        end %#ok<*CAXIS>
+    % set title (if not set earlier)
+    if ~nSubtiles && ~iud('titles') % no groubpBy, and titles given
+        title(ax, ip.Results.titles{sub2ind([nData, nView], idxData, idxView)});
+    end
 
-        cl = caxis;
-        currentData(currentData < cl(1)) = cl(1);
-        currentData(currentData > cl(2)) = cl(2);
-
-        % generate cmap
-        if isa(cmap, 'function_handle'); temp = cmap(256);
-        else; temp = cmap; end
-        % consider trying plotSurfaceOptions{2} = cmap(); % for both cases
-        plotSurfaceOptions{2} = temp;
-
-        % plot using plotSurfaceROIBoundary
-        [patches{end+1},boundary_plots{end+1}] = plotSurfaceROIBoundary(...
-            struct('vertices', currentVerts, 'faces', currentFaces), ...
-            currentRois, currentData, ...
-            plotSurfaceOptions{:}); %#ok<AGROW> 
-
-        colormap(ax, plotSurfaceOptions{2});
-        axis off; axis equal; axis tight;
-
-        % set title (if not set earlier)
-        if isempty(nSubtiles) && ~iud('titles') % no groubpBy, and titles given
-            title(ax, ip.Results.titles{sub2ind([nData, nView], idxData, idxView)});
+    % Change view according to flag
+    if isa(viewOrder{idxView}, 'double')
+        view(viewOrder{idxView});
+    else
+        switch viewOrder{idxView}
+            case "lm", view([90 0]);
+            case "ll", view([-90 0]);
+            case "rm", view([-90 0]);
+            case "rl", view([90 0]);
+            otherwise, view([0 90]); % top view
         end
-
-        % set camlights
-        for nCamlight = 1:size(camlights, 1)
-            camlight(ax, camlights(nCamlight, 1), camlights(nCamlight, 2));
-        end
-
-        % set colorbar if requested
-        if ip.Results.colorbarOn
-            if strcmp(groupBy, 'data')
-                if idxView == nView % so that only 1 colorbar is plotted
-                    c = colorbar(ax, ip.Results.colorbarOptions{:});
-                    c.Layout.Tile = ip.Results.colorbarLocation;
-                end
-            elseif strcmp(groupBy, 'view')
-                if idxData == nData % so that only 1 colorbar is plotted
-                    c = colorbar(ax, ip.Results.colorbarOptions{:});
-                    c.Layout.Tile = ip.Results.colorbarLocation;
-                end
-            else
-                colorbar(ax, ip.Results.colorbarOptions{:});
-            end
-        end
-
-        % Change view according to flag
-        if isa(viewOrder{idxView}, 'double')
-            view(viewOrder{idxView});
-        else
-            switch viewOrder{idxView}
-                case "lm", view([90 0]);
-                case "ll", view([-90 0]);
-                case "rm", view([-90 0]);
-                case "rl", view([90 0]);
-                otherwise, view([0 90]); % top view
-            end
-        end
+    end
 
     end
 end

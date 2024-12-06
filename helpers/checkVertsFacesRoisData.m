@@ -10,7 +10,7 @@ function [verts,faces,rois,data] = checkVertsFacesRoisData(varargin)
 %
 %% Input Arguments
 %  verts - xyz coordinates of vertices (three column matrix)
-%  faces - triangulation ie. IDs of vertices making up each face (three column matrix) 
+%  faces - triangulation ie. IDs of vertices making up each face (three column matrix)
 %  rois - roi allocation of each vertex (V x 1 vector)
 %  data - data allocated to each vertex or roi (V x 1 or R x 1 vector)
 %
@@ -20,25 +20,25 @@ function [verts,faces,rois,data] = checkVertsFacesRoisData(varargin)
 %  If `checkContents` is set to false, only the shape of the input matrices will
 %  be tested. If `checkContents` is true, then the contents will also be checked
 %  e.g. that `faces` uses all the vertices and that `rois` cannot have negative
-%  values. 
+%  values.
 %
-%  fillEmpty - flag to populate `rois` and `data`, if the inputs are empty (false (default) | true) 
+%  fillEmpty - flag to populate `rois` and `data`, if the inputs are empty (false (default) | true)
 %  If set to true, rois will be set to all ones, and data will be set to the
 %  second column of `verts`.
 %
 %
 %% Output Arguments
 %  verts, faces, rois, data - transposed if needed
-% 
-% 
+%
+%
 %% See Also
 % plotSurfaceROIBoundary, read_vtk
-% 
-% 
-%% Authors 
+%
+%
+%% Authors
 % Mehul Gajwani, Monash University, 2023
-% 
-% 
+%
+%
 
 
 %% Prelims
@@ -49,12 +49,12 @@ addOptional(ip, 'faces', [], @(x) validationFcn(x));
 addOptional(ip, 'rois',  [], @(x) validationFcn(x) || islogical(x));
 addOptional(ip, 'data',  [], @(x) validationFcn(x) || islogical(x));
 
-addParameter(ip, 'checkContents', true, @islogical);
-addParameter(ip, 'fillEmpty', false, @islogical);
+addParameter(ip, 'checkContents',   true,   @islogical);
+addParameter(ip, 'fillEmpty',       false,  @islogical);
 
 parse(ip, varargin{:});
-verts = ip.Results.verts;
-faces = ip.Results.faces;
+verts =  ip.Results.verts;
+faces =  ip.Results.faces;
 rois  = +ip.Results.rois;
 data  = +ip.Results.data;
 
@@ -64,59 +64,57 @@ data  = +ip.Results.data;
 
 matrices = {verts, faces, rois, data};
 names = {'Vertices', 'Faces', 'ROIs', 'Data'};
-target2ndDim = {3, 3, 1, 1};
+targetWidth = {3, 3, 1, 1};
 
 for ii = 1:length(matrices)
     if isempty(matrices{ii})
         % skip - do nothing
-    elseif size(matrices{ii}, 2) == target2ndDim{ii}
+    elseif width(matrices{ii}) == targetWidth{ii}
         % good - do nothing
-    elseif size(matrices{ii}, 1) == target2ndDim{ii}
+    elseif height(matrices{ii}) == targetWidth{ii}
         matrices{ii} = matrices{ii}.';
     else
-        error('%s must have a dimension of size %d', names{ii}, target2ndDim{ii});
+        error('%s must have a dimension of size %d', names{ii}, targetWidth{ii});
     end
 end
 
 [verts, faces, rois, data] = deal(matrices{:});
 
 if isallhere({verts, rois})
-    assert(size(verts, 1) == size(rois, 1), ...
+    assert(height(verts) == height(rois), ...
         'Vertices and ROIs must have the same number of points');
+end
+
+if isallhere({data, verts}) || isallhere({data, rois}) || isallhere({data, faces})
+    assert(ismember( height(data), [height(verts),height(faces),max(rois)] ), ...
+        'Data should be one per vertex / per face / per ROI');
 end
 
 
 %% Fill empty, if desired
 if ip.Results.fillEmpty
-    if isempty(rois); rois = ones(size(verts, 1),1); end
+    if isempty(rois); rois = ones(height(verts),1); end
     if isempty(data); data = verts(:, 2); end
 end
 
 
 %% Check contents
-if ip.Results.checkContents
-    if isallhere({verts, faces})
-        if max(faces, [], "all") ~= size(verts, 1)
-            warning('The vertices are not all mapped to the faces');
-        end
+if ~ip.Results.checkContents
+    return; 
+end
+
+if isallhere({faces}); mustBePositive(faces); mustBeInteger(faces); end
+
+if isallhere({verts, faces})
+    if max(faces, [], "all") ~= height(verts)
+        warning('The vertices are not all mapped to the faces');
     end
+end
 
-    if isallhere({faces}); mustBeNonnegative(faces); mustBeInteger(faces); end
-
-    if isallhere({rois})
-        mustBeNonnegative(rois); mustBeInteger(rois);
-
-        goodRois = ( all(rois) && (length(unique(rois))==max(rois)) ) || ... % no non-zeros rois
-            (~all(rois) && (length(unique(rois))==max(rois)+1) ); % some non-zero rois
-
-        if ~goodRois
-            warning('ROIs appear to not be sequential');
-        end
-    end
-
-    if isallhere({data, verts}) || isallhere({data, rois})
-        assert(size(data, 1) == size(verts, 1) || size(data, 1) == max(rois), ...
-            'Data should be one per vertex or one per ROI');
+if isallhere({rois})
+    mustBeNonnegative(rois); mustBeInteger(rois);
+    if length(unique(nonzeros(rois))) ~= max(rois)
+        warning('ROIs appear to not be sequential');
     end
 end
 
